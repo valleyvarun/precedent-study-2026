@@ -1,0 +1,289 @@
+:root {
+  --background: #000000;
+  --foreground: #f8f8f2;
+  --rule: #313131;
+  --body-background: #f4f1ea;
+  --body-text: #111111;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--body-text);
+  background: var(--body-background);
+  font-family: "Courier New", Courier, monospace;
+}
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: 35% 30% 35%;
+  align-items: start;
+  width: 100%;
+  min-height: 6.5vh;
+  padding: 1.2vh 2.5vw;
+  color: var(--foreground);
+  background: var(--background);
+  border-bottom: 0.08vw solid var(--rule);
+}
+
+.site-header h1,
+.header-block p {
+  margin: 0;
+  line-height: 112%;
+}
+
+.site-header h1 {
+  align-self: center;
+  padding-top: 0.15vh;
+  font-size: 1.45vw;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.header-block {
+  font-size: 1vw;
+  font-weight: 400;
+}
+
+.header-right {
+  justify-self: end;
+  text-align: right;
+}
+
+.header-right p:first-child {
+  font-weight: 700;
+}
+
+.page-body {
+  width: 100%;
+  margin-top: 6.5vh;
+  padding: 4vh 2.5vw;
+}
+
+.intro-section {
+  display: grid;
+  grid-template-columns: 14% calc(86% - 2.5vw);
+  gap: 2.5vw;
+  align-items: center;
+  width: 100%;
+}
+
+.scratch-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.page-body p {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.1vw;
+  line-height: 165%;
+}
+
+.table-title {
+  margin: 4vh 0 0;
+  font-size: 1.15vw;
+  font-weight: 700;
+  line-height: 120%;
+  text-transform: lowercase;
+}
+
+.links-table {
+  width: 100%;
+  margin-top: 1.2vh;
+  border-collapse: collapse;
+  font-size: 1.05vw;
+}
+
+.links-table th,
+.links-table td {
+  padding: 1.2vh 0;
+  border-top: 0.08vw solid var(--rule);
+  text-align: left;
+}
+
+.links-table th {
+  font-weight: 700;
+}
+
+.links-table a {
+  color: var(--body-text);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 15.83%);
+  gap: 1vw;
+  width: 100%;
+  margin-top: 1.2vh;
+}
+
+.gallery-item {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.gallery-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: 5vh 5vw;
+  color: var(--foreground);
+  background: rgb(0 0 0 / 86%);
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox-content {
+  display: grid;
+  grid-template-columns: 8% 84% 8%;
+  align-items: center;
+  width: 100%;
+}
+
+.lightbox-figure {
+  justify-self: center;
+  margin: 0;
+  text-align: center;
+}
+
+.lightbox-figure img {
+  display: block;
+  width: auto;
+  max-width: 76vw;
+  height: 70vh;
+  object-fit: contain;
+}
+
+.lightbox-figure figcaption {
+  margin-top: 1.6vh;
+  font-size: 1vw;
+  line-height: 140%;
+}
+
+.lightbox-nav,
+.lightbox-close {
+  color: var(--foreground);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.lightbox-nav {
+  font-size: 3vw;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 2vh;
+  right: 2.5vw;
+  font-size: 1.6vw;
+}
+
+@media (max-width: 100vh) {
+  .site-header {
+    grid-template-columns: 100%;
+    gap: 1.4vh;
+    min-height: 18vh;
+    padding: 2vh 5vw;
+  }
+
+  .site-header h1 {
+    grid-row: 1;
+    justify-self: center;
+    font-size: 6vw;
+    white-space: normal;
+  }
+
+  .header-block {
+    font-size: 3.8vw;
+  }
+
+  .header-left,
+  .header-right {
+    justify-self: stretch;
+    text-align: left;
+  }
+
+  .page-body {
+    width: 100%;
+    margin-top: 18vh;
+    padding: 4vh 5vw;
+  }
+
+  .intro-section {
+    grid-template-columns: 100%;
+    gap: 0;
+  }
+
+  .scratch-logo {
+    width: 36vw;
+    padding-bottom: 2vh;
+  }
+
+  .page-body p {
+    font-size: 4.5vw;
+  }
+
+  .links-table {
+    margin-top: 1.2vh;
+    font-size: 4vw;
+  }
+
+  .table-title {
+    margin-top: 4vh;
+    font-size: 4.4vw;
+  }
+
+  .gallery-grid {
+    gap: 1vw;
+  }
+
+  .lightbox-content {
+    grid-template-columns: 12% 76% 12%;
+  }
+
+  .lightbox-figure img {
+    max-width: 76vw;
+    height: 58vh;
+  }
+
+  .lightbox-figure figcaption {
+    font-size: 3.8vw;
+  }
+
+  .lightbox-nav {
+    font-size: 8vw;
+  }
+
+  .lightbox-close {
+    font-size: 5vw;
+  }
+}

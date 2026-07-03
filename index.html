@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>precedent study</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header" aria-label="Site header">
+    <div class="header-block header-left">
+      <p>GSAPP</p>
+      <p>Columbia University</p>
+    </div>
+
+    <h1>precedent study</h1>
+
+    <div class="header-block header-right">
+      <p>Varun SA</p>
+      <p>MS CDP</p>
+    </div>
+  </header>
+
+  <main class="page-body">
+    <section class="intro-section" aria-label="Scratch introduction">
+      <img class="scratch-logo" src="imgs/Scratchlogo.svg.webp" alt="Scratch logo">
+      <p id="intro-text">Loading...</p>
+    </section>
+
+    <h2 class="table-title">bibliography</h2>
+    <table class="links-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Links</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Scratch</td>
+          <td><a href="https://scratch.mit.edu/" target="_blank" rel="noopener noreferrer">https://scratch.mit.edu/</a></td>
+        </tr>
+        <tr>
+          <td>Scratch: Programming for All</td>
+          <td><a href="https://cacm.acm.org/research/scratch-programming-for-all/" target="_blank" rel="noopener noreferrer">https://cacm.acm.org/research/scratch-programming-for-all/</a></td>
+        </tr>
+        <tr>
+          <td>Fun, Not Fear, Is at the Heart of Scratch, a New Programming Language</td>
+          <td><a href="https://www.chronicle.com/article/fun-not-fear-is-at-the-heart-of-scratch-a-new-programming-language" target="_blank" rel="noopener noreferrer">https://www.chronicle.com/article/fun-not-fear-is-at-the-heart-of-scratch-a-new-programming-language</a></td>
+        </tr>
+        <tr>
+          <td>My New Podcast: Lifelong Kindergarten</td>
+          <td><a href="https://mres.medium.com/my-new-podcast-lifelong-kindergarten-c26b50096087#:~:text=For%20example%2C%20we%20collaborated%20with,stories%2C%20games%2C%20and%20animations." target="_blank" rel="noopener noreferrer">https://mres.medium.com/my-new-podcast-lifelong-kindergarten</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="table-title">gallery</h2>
+    <section class="gallery-grid" aria-label="Image gallery">
+      <button class="gallery-item" type="button" data-full="imgs/mitchel-resnick-scratch.jpg" data-caption="Mitchel Resnick, creator of Scratch.">
+        <img src="imgs/mitchel-resnick-scratch.jpg" alt="Mitchel Resnick with Scratch on screen">
+      </button>
+    </section>
+
+    <h2 class="table-title">references</h2>
+    <table class="links-table">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Links</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>[1]</td>
+          <td><a href="https://www.media.mit.edu/posts/scratch-100-million-users/" target="_blank" rel="noopener noreferrer">https://www.media.mit.edu/posts/scratch-100-million-users/</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <div class="lightbox" id="gallery-lightbox" hidden>
+    <button class="lightbox-close" type="button" aria-label="Close gallery">x</button>
+    <div class="lightbox-content" role="dialog" aria-modal="true" aria-label="Gallery image viewer">
+      <button class="lightbox-nav" type="button" id="gallery-prev" aria-label="Previous image">&lt;</button>
+      <figure class="lightbox-figure">
+        <img id="lightbox-image" src="" alt="">
+        <figcaption id="lightbox-caption"></figcaption>
+      </figure>
+      <button class="lightbox-nav" type="button" id="gallery-next" aria-label="Next image">&gt;</button>
+    </div>
+  </div>
+
+  <script>
+    fetch("intro-para.txt")
+      .then((response) => response.text())
+      .then((text) => {
+        document.getElementById("intro-text").textContent = text;
+      })
+      .catch(() => {
+        document.getElementById("intro-text").textContent = "Unable to load intro text.";
+      });
+
+    const galleryItems = Array.from(document.querySelectorAll(".gallery-item"));
+    const lightbox = document.getElementById("gallery-lightbox");
+    const lightboxImage = document.getElementById("lightbox-image");
+    const lightboxCaption = document.getElementById("lightbox-caption");
+    let currentGalleryIndex = 0;
+
+    function showGalleryImage(index) {
+      currentGalleryIndex = (index + galleryItems.length) % galleryItems.length;
+      const item = galleryItems[currentGalleryIndex];
+      const image = item.querySelector("img");
+
+      lightboxImage.src = item.dataset.full;
+      lightboxImage.alt = image.alt;
+      lightboxCaption.textContent = item.dataset.caption;
+      lightbox.hidden = false;
+    }
+
+    galleryItems.forEach((item, index) => {
+      item.addEventListener("click", () => showGalleryImage(index));
+    });
+
+    document.getElementById("gallery-prev").addEventListener("click", () => {
+      showGalleryImage(currentGalleryIndex - 1);
+    });
+
+    document.getElementById("gallery-next").addEventListener("click", () => {
+      showGalleryImage(currentGalleryIndex + 1);
+    });
+
+    document.querySelector(".lightbox-close").addEventListener("click", () => {
+      lightbox.hidden = true;
+    });
+  </script>
+</body>
+</html>
