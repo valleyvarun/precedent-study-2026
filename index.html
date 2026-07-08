@@ -21,13 +21,31 @@
     </div>
   </header>
 
+  <nav class="section-nav" aria-label="Section navigation">
+    <button id="section-prev" type="button" aria-label="Previous section">&lt;</button>
+    <button id="section-next" type="button" aria-label="Next section">&gt;</button>
+  </nav>
+
   <main class="page-body">
-    <section class="intro-section" aria-label="Scratch introduction">
+    <section class="intro-section section-target" aria-label="Scratch introduction">
       <img class="scratch-logo" src="imgs/Scratchlogo.svg.webp" alt="Scratch logo">
       <p id="intro-text">Loading...</p>
     </section>
 
-    <h2 class="table-title">bibliography</h2>
+    <h2 class="table-title section-target">Figma Board</h2>
+    <p class="section-link"><a href="https://www.figma.com/board/iOWpAOzeLpKksjAz85m2yM/Varun-Precedent-Study?node-id=0-1&t=KWyRKPXY4yzFtkmW-1" target="_blank" rel="noopener noreferrer">https://www.figma.com/board/iOWpAOzeLpKksjAz85m2yM/Varun-Precedent-Study</a></p>
+
+    <h2 class="table-title section-target">layers of analysis</h2>
+    <section class="analysis-section" aria-label="Layers of analysis">
+      <div class="analysis-tabs" aria-label="Analysis categories">
+        <button class="analysis-tab is-active" type="button" aria-pressed="true">what exists?</button>
+        <button class="analysis-tab" type="button" aria-pressed="false">project context</button>
+        <button class="analysis-tab" type="button" aria-pressed="false">visual aesthetic</button>
+      </div>
+      <div class="analysis-content" aria-label="Analysis content"></div>
+    </section>
+
+    <h2 class="table-title section-target">bibliography</h2>
     <table class="links-table">
       <thead>
         <tr>
@@ -55,14 +73,14 @@
       </tbody>
     </table>
 
-    <h2 class="table-title">gallery</h2>
+    <h2 class="table-title section-target">gallery</h2>
     <section class="gallery-grid" aria-label="Image gallery">
       <button class="gallery-item" type="button" data-full="imgs/mitchel-resnick-scratch.jpg" data-caption="Mitchel Resnick, creator of Scratch.">
         <img src="imgs/mitchel-resnick-scratch.jpg" alt="Mitchel Resnick with Scratch on screen">
       </button>
     </section>
 
-    <h2 class="table-title">references</h2>
+    <h2 class="table-title section-target">references</h2>
     <table class="links-table">
       <thead>
         <tr>
@@ -105,7 +123,55 @@
     const lightbox = document.getElementById("gallery-lightbox");
     const lightboxImage = document.getElementById("lightbox-image");
     const lightboxCaption = document.getElementById("lightbox-caption");
+    const analysisTabs = Array.from(document.querySelectorAll(".analysis-tab"));
+    const sectionTargets = Array.from(document.querySelectorAll(".section-target"));
+    const sectionPrev = document.getElementById("section-prev");
+    const sectionNext = document.getElementById("section-next");
     let currentGalleryIndex = 0;
+
+    function getCurrentSectionIndex() {
+      const sectionOffset = parseFloat(getComputedStyle(sectionTargets[0]).scrollMarginTop);
+      const currentTop = window.scrollY + sectionOffset + 1;
+
+      return sectionTargets.reduce((currentIndex, target, index) => {
+        return target.offsetTop <= currentTop ? index : currentIndex;
+      }, 0);
+    }
+
+    function moveSection(direction) {
+      const currentIndex = getCurrentSectionIndex();
+      const nextIndex = Math.max(0, Math.min(sectionTargets.length - 1, currentIndex + direction));
+      sectionTargets[nextIndex].scrollIntoView({ block: "start" });
+    }
+
+    sectionPrev.addEventListener("click", () => moveSection(-1));
+    sectionNext.addEventListener("click", () => moveSection(1));
+
+    document.addEventListener("keydown", (event) => {
+      if (!lightbox.hidden || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+        return;
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        moveSection(-1);
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        moveSection(1);
+      }
+    });
+
+    analysisTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        analysisTabs.forEach((item) => {
+          const isActive = item === tab;
+          item.classList.toggle("is-active", isActive);
+          item.setAttribute("aria-pressed", String(isActive));
+        });
+      });
+    });
 
     function showGalleryImage(index) {
       currentGalleryIndex = (index + galleryItems.length) % galleryItems.length;

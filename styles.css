@@ -66,7 +66,36 @@ body {
 .page-body {
   width: 100%;
   margin-top: 6.5vh;
-  padding: 4vh 2.5vw;
+  padding: 4vh 5vw;
+}
+
+.section-target {
+  scroll-margin-top: 9vh;
+}
+
+.section-nav {
+  position: fixed;
+  right: 2.5vw;
+  bottom: 2.5vh;
+  z-index: 6;
+  display: flex;
+  gap: 0.5vw;
+}
+
+.section-nav button {
+  display: grid;
+  place-items: center;
+  width: 2.4vw;
+  min-width: 32px;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  color: var(--foreground);
+  background: var(--background);
+  border: 0.08vw solid var(--rule);
+  cursor: pointer;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.3vw;
+  line-height: 100%;
 }
 
 .intro-section {
@@ -90,12 +119,63 @@ body {
   line-height: 165%;
 }
 
+.section-link {
+  margin-top: 1.2vh;
+}
+
+.section-link a {
+  color: var(--body-text);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.05vw;
+}
+
 .table-title {
-  margin: 4vh 0 0;
+  margin: 7vh 0 0;
   font-size: 1.15vw;
   font-weight: 700;
   line-height: 120%;
   text-transform: lowercase;
+}
+
+.analysis-section {
+  width: 100%;
+  margin-top: 1.2vh;
+}
+
+.analysis-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  align-items: stretch;
+  width: max-content;
+}
+
+.analysis-tab {
+  padding: 1.2vh 2.5vw;
+  border: 0.08vw solid var(--rule);
+  border-right: 0;
+  color: #8d8a83;
+  background: var(--body-background);
+  cursor: pointer;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.05vw;
+  font-weight: 700;
+  line-height: 120%;
+}
+
+.analysis-tab:last-child {
+  border-right: 0.08vw solid var(--rule);
+}
+
+.analysis-tab.is-active {
+  color: var(--body-text);
+  background: #ebe6dc;
+}
+
+.analysis-content {
+  aspect-ratio: 16 / 7;
+  width: 100%;
+  background: #ebe6dc;
+  border: 0.08vw solid var(--rule);
 }
 
 .links-table {
@@ -235,7 +315,23 @@ body {
   .page-body {
     width: 100%;
     margin-top: 18vh;
-    padding: 4vh 5vw;
+    padding: 4vh 6vw;
+  }
+
+  .section-target {
+    scroll-margin-top: 21vh;
+  }
+
+  .section-nav {
+    right: 5vw;
+    bottom: 2vh;
+    gap: 1.5vw;
+  }
+
+  .section-nav button {
+    width: 10vw;
+    min-width: 0;
+    font-size: 5vw;
   }
 
   .intro-section {
@@ -252,14 +348,34 @@ body {
     font-size: 4.5vw;
   }
 
+  .section-link a {
+    font-size: 4vw;
+  }
+
   .links-table {
     margin-top: 1.2vh;
     font-size: 4vw;
   }
 
   .table-title {
-    margin-top: 4vh;
+    margin-top: 6vh;
     font-size: 4.4vw;
+  }
+
+  .analysis-tabs {
+    grid-template-columns: 100%;
+    width: 100%;
+  }
+
+  .analysis-tab {
+    padding: 1.2vh 3vw;
+    border: 0.08vw solid var(--rule);
+    border-bottom: 0;
+    font-size: 4vw;
+  }
+
+  .analysis-tab:last-child {
+    border-bottom: 0.08vw solid var(--rule);
   }
 
   .gallery-grid {
