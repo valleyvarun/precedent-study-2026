@@ -1,0 +1,127 @@
+.analysis-diagram {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+
+.analysis-diagram:active {
+  cursor: grabbing;
+}
+
+.diagram-link {
+  stroke: #77736b;
+  stroke-width: 1.4;
+  vector-effect: non-scaling-stroke;
+}
+
+.diagram-node {
+  cursor: grab;
+}
+
+.diagram-node.is-dragging {
+  cursor: grabbing;
+}
+
+.diagram-node rect {
+  fill: #f7f3ea;
+  stroke: var(--rule);
+  stroke-width: 1.4;
+  vector-effect: non-scaling-stroke;
+}
+
+.diagram-node.is-root rect {
+  fill: var(--body-background);
+  stroke-width: 1.8;
+}
+
+.diagram-node.is-root .diagram-card-content {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.diagram-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  gap: 8px;
+  color: var(--body-text);
+  pointer-events: none;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+  line-height: 125%;
+}
+
+.diagram-card-title {
+  font-weight: 700;
+}
+
+.diagram-card-content img {
+  display: block;
+  width: 100%;
+  max-height: 130px;
+  object-fit: contain;
+  background: #ffffff;
+  border: 1px solid #c9c3b8;
+}
+
+.diagram-card-content img.diagram-logo-image {
+  width: 120px;
+  max-height: 54px;
+  background: transparent;
+  border: 0;
+}
+
+.diagram-card-content img.diagram-tutorial-image {
+  max-height: 155px;
+  object-fit: contain;
+}
+
+.diagram-image-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.diagram-image-row img {
+  height: 112px;
+  max-height: none;
+  object-fit: cover;
+}
+
+.diagram-card-content ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 130%;
+}
+
+.diagram-card-content li {
+  margin: 0 0 3px;
+}
+
+.diagram-loading {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.05vw;
+}
+
+@media (max-width: 100vh) {
+  .diagram-card-content {
+    font-size: 14px;
+  }
+
+  .diagram-card-content ul {
+    font-size: 11px;
+  }
+
+  .diagram-loading {
+    font-size: 4vw;
+  }
+}

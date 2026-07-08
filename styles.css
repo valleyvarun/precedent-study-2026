@@ -173,9 +173,20 @@ body {
 
 .analysis-content {
   aspect-ratio: 16 / 7;
+  position: relative;
   width: 100%;
+  overflow: hidden;
   background: #ebe6dc;
   border: 0.08vw solid var(--rule);
+}
+
+.analysis-panel {
+  width: 100%;
+  height: 100%;
+}
+
+.analysis-panel[hidden] {
+  display: none;
 }
 
 .links-table {

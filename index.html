@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>precedent study</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="diagram.css">
 </head>
 <body>
   <header class="site-header" aria-label="Site header">
@@ -38,11 +39,15 @@
     <h2 class="table-title section-target">layers of analysis</h2>
     <section class="analysis-section" aria-label="Layers of analysis">
       <div class="analysis-tabs" aria-label="Analysis categories">
-        <button class="analysis-tab is-active" type="button" aria-pressed="true">what exists?</button>
-        <button class="analysis-tab" type="button" aria-pressed="false">project context</button>
-        <button class="analysis-tab" type="button" aria-pressed="false">visual aesthetic</button>
+        <button class="analysis-tab is-active" type="button" aria-pressed="true" aria-controls="what-exists-panel" data-panel="what-exists-panel">what exists?</button>
+        <button class="analysis-tab" type="button" aria-pressed="false" aria-controls="project-context-panel" data-panel="project-context-panel">project context</button>
+        <button class="analysis-tab" type="button" aria-pressed="false" aria-controls="visual-aesthetic-panel" data-panel="visual-aesthetic-panel">visual aesthetic</button>
       </div>
-      <div class="analysis-content" aria-label="Analysis content"></div>
+      <div class="analysis-content" aria-label="Analysis content">
+        <div class="analysis-panel" id="what-exists-panel"></div>
+        <div class="analysis-panel" id="project-context-panel" hidden></div>
+        <div class="analysis-panel" id="visual-aesthetic-panel" hidden></div>
+      </div>
     </section>
 
     <h2 class="table-title section-target">bibliography</h2>
@@ -128,6 +133,7 @@
     const lightboxImage = document.getElementById("lightbox-image");
     const lightboxCaption = document.getElementById("lightbox-caption");
     const analysisTabs = Array.from(document.querySelectorAll(".analysis-tab"));
+    const analysisPanels = Array.from(document.querySelectorAll(".analysis-panel"));
     const sectionTargets = Array.from(document.querySelectorAll(".section-target"));
     const sectionPrev = document.getElementById("section-prev");
     const sectionNext = document.getElementById("section-next");
@@ -174,6 +180,10 @@
           item.classList.toggle("is-active", isActive);
           item.setAttribute("aria-pressed", String(isActive));
         });
+
+        analysisPanels.forEach((panel) => {
+          panel.hidden = panel.id !== tab.dataset.panel;
+        });
       });
     });
 
@@ -204,5 +214,7 @@
       lightbox.hidden = true;
     });
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script src="analysis-diagram.js"></script>
 </body>
 </html>
