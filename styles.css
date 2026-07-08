@@ -182,6 +182,7 @@ body {
   width: 100%;
   margin-top: 1.2vh;
   border-collapse: collapse;
+  table-layout: fixed;
   font-size: 1.05vw;
 }
 
@@ -192,12 +193,24 @@ body {
   text-align: left;
 }
 
+.links-table th:first-child,
+.links-table td:first-child {
+  width: 38%;
+  padding-right: 2.5vw;
+}
+
+.links-table th + th,
+.links-table td + td {
+  padding-left: 2.5vw;
+}
+
 .links-table th {
   font-weight: 700;
 }
 
 .links-table a {
   color: var(--body-text);
+  overflow-wrap: anywhere;
 }
 
 .gallery-grid {
