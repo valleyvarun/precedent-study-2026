@@ -90,6 +90,12 @@
   line-height: 120%;
 }
 
+.diagram-card-content.is-website-embed {
+  gap: 4px;
+  font-size: 13px;
+  line-height: 118%;
+}
+
 .diagram-card-inline {
   display: inline-flex;
   align-items: center;
@@ -122,6 +128,10 @@
 
 .diagram-card-content img.diagram-code-block-types-image {
   max-height: 120px;
+}
+
+.diagram-card-content img.diagram-web-embed-image {
+  max-height: 75px;
 }
 
 .diagram-card-content img.diagram-tutorial-image {
