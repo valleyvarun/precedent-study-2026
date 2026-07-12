@@ -14,27 +14,33 @@
   const width = 2100;
   const height = 900;
   const initialZoom = d3.zoomIdentity.translate(367.5, 157.5).scale(0.65);
+  const cardInsetX = 12;
+  const cardInsetY = 10;
   const nodes = [
-    { id: "what", label: "What exists?", x: 739.966552734375, y: 381.82275390625, width: 220, height: 120, root: true, image: "imgs/Scratchlogo.svg.webp", imageClass: "diagram-logo-image" },
-    { id: "create", label: "create", x: 829.5652465820312, y: 133.64549255371094, width: 140, height: 54 },
-    { id: "community", label: "community", x: 430, y: 350, width: 165, height: 54 },
-    { id: "learning", label: "learning", x: 960.2008056640625, y: 620.7525024414062, width: 165, height: 54 },
-    { id: "editor", label: "Scratch editor", x: 1060.1337890625, y: -161.20401763916016, width: 300, height: 350, image: "imgs/create-img-1.png", imageClass: "diagram-editor-image", imagePlacement: "after", items: ["block code", "sprites", "stage preview"] },
-    { id: "community-projects", label: "community projects", x: 60, y: 290, width: 330, height: 145, images: ["imgs/comments-ss-1.png", "imgs/scratch-explore-ss-1.png"], showLabel: false },
-    { id: "share-projects", label: "share projects", x: -35.602012634277344, y: 507.1070556640625, width: 190, height: 54 },
-    { id: "remix-projects", label: "remix projects", x: 270.7859802246094, y: 505, width: 190, height: 54 },
-    { id: "studios", label: "studios", x: 149.71571350097656, y: 632.6421508789062, width: 135, height: 54 },
-    { id: "tutorials", label: "tutorials + remixes", x: 967.3577880859375, y: 746.95654296875, width: 320, height: 285, image: "imgs/tutorials-ss-1.png", imageClass: "diagram-tutorial-image", items: ["video tutorials", "user-made tutorial Scratch projects", "shared with community"] },
-    { id: "projects", label: "projects", x: 1434.1806640625, y: 11.15383529663086, width: 150, height: 54 },
-    { id: "block-code", label: "block code", x: 1647.8929443359375, y: -80.91973876953125, width: 165, height: 54 },
-    { id: "assets", label: "assets", x: 1667.1070556640625, y: 122.75920104980469, width: 140, height: 54 },
-    { id: "images", label: "images", x: 1885.5350341796875, y: 62.792640686035156, width: 130, height: 48 },
-    { id: "text", label: "text", x: 1889.7491455078125, y: 181.755859375, width: 130, height: 48 },
-    { id: "audio", label: "audio", x: 1885.53515625, y: 294.39794921875, width: 130, height: 48 },
-    { id: "extensions", label: "extensions", x: 1547.9598388671875, y: 365.4347839355469, width: 170, height: 54 },
-    { id: "software", label: "software", x: 1790.60205078125, y: 438.8963317871094, width: 150, height: 54 },
-    { id: "hardware", label: "hardware", x: 1576.42138671875, y: 553.0769653320312, width: 160, height: 54 },
-    { id: "lego", label: "lego robotics kits", x: 1697.6422119140625, y: 694.966552734375, width: 230, height: 54 }
+    { id: "what", label: "What exists?", x: 439.966552734375, y: 381.82275390625, root: true, image: "imgs/Scratchlogo.svg.webp", imageClass: "diagram-logo-image" },
+    { id: "create", label: "create", x: 529.5652465820312, y: 133.64549255371094 },
+    { id: "community", label: "community", x: 130, y: 350 },
+    { id: "learning", label: "learning", x: 660.2008056640625, y: 620.7525024414062 },
+    { id: "editor", label: "Scratch editor", x: 760.1337890625, y: -161.20401763916016, image: "imgs/create-img-1.png", imageClass: "diagram-editor-image", imagePlacement: "after", items: ["block code", "sprites", "stage preview"] },
+    { id: "community-projects", label: "community projects", x: -240, y: 290, images: ["imgs/comments-ss-1.png", "imgs/scratch-explore-ss-1.png"], imagesClass: "diagram-community-images", showLabel: false },
+    { id: "share-projects", label: "share projects", x: -335.602012634277344, y: 507.1070556640625 },
+    { id: "remix-projects", label: "remix projects", x: -29.214019775390625, y: 505 },
+    { id: "studios", label: "studios", x: -150.28428649902344, y: 632.6421508789062 },
+    { id: "tutorials", label: "tutorials screenshot", x: 720.033447265625, y: 704.8161010742188, image: "imgs/tutorials-ss-1.png", imageClass: "diagram-tutorial-image", showLabel: false },
+    { id: "youtube-video-tutorials", label: "Youtube video tutorials", labelLines: ["Youtube video", "tutorials"], x: 437.7591552734375, y: 997.6087646484375 },
+    { id: "community-tutorial-projects", label: "community tutorial scratch projects", labelLines: ["community tutorial", "scratch projects"], x: 672.474853515625, y: 1014.46484375 },
+    { id: "projects", label: "projects", x: 1134.1806640625, y: 11.15383529663086 },
+    { id: "block-code", label: "block code", x: 1318.39453125, y: -212.17391562461853, image: "imgs/block-code-example-1.png", imageClass: "diagram-block-code-image", imagePlacement: "after" },
+    { id: "assets", label: "assets", x: 1333.3946533203125, y: 91.15384674072266 },
+    { id: "images", label: "images", x: 1513.896240234375, y: 35.401336669921875 },
+    { id: "sprite", label: "sprite", x: 1662.35791015625, y: -205.6688995361328, images: ["imgs/cat-sprite.png", "imgs/blueguy-sprite.png", "imgs/crab-sprite.png", "imgs/hammer-sprite.jpg"], imagesClass: "diagram-sprite-grid", imagePlacement: "after" },
+    { id: "backdrop", label: "backdrop", x: 1666.5718994140625, y: -23.561874389648438, images: ["imgs/backdrop-example-1.png", "imgs/backdrop-example-2.png"], imagesClass: "diagram-backdrop-stack", imagePlacement: "after" },
+    { id: "text", label: "text", x: 1518.1103515625, y: 139.61538696289062 },
+    { id: "audio", label: "audio", x: 1516.00341796875, y: 233.29428100585938 },
+    { id: "extensions", label: "extensions", x: 1247.9598388671875, y: 365.4347839355469, image: "imgs/extensions-ss.png", imageClass: "diagram-extensions-image", imagePlacement: "after" },
+    { id: "software", label: "software", x: 1540, y: 438.8963317871094 },
+    { id: "hardware", label: "hardware", x: 1276.42138671875, y: 610 },
+    { id: "lego", label: "lego robotics kits", x: 1397.6422119140625, y: 694.966552734375 }
   ];
 
   const links = [
@@ -51,9 +57,13 @@
     ["community-projects", "remix-projects"],
     ["community-projects", "studios"],
     ["learning", "tutorials"],
+    ["tutorials", "youtube-video-tutorials"],
+    ["tutorials", "community-tutorial-projects"],
     ["projects", "block-code"],
     ["projects", "assets"],
     ["assets", "images"],
+    ["images", "sprite"],
+    ["images", "backdrop"],
     ["assets", "text"],
     ["assets", "audio"],
     ["projects", "extensions"],
@@ -63,6 +73,34 @@
   ].map(([source, target]) => ({ source, target }));
 
   const nodeById = new Map(nodes.map((node) => [node.id, node]));
+  const nodeLevels = getNodeLevels("what");
+
+  links.forEach((link) => {
+    link.level = Math.min(nodeLevels.get(link.source) ?? 0, nodeLevels.get(link.target) ?? 0);
+  });
+
+  function getNodeLevels(rootId) {
+    const levels = new Map([[rootId, 0]]);
+    const queue = [rootId];
+
+    while (queue.length) {
+      const source = queue.shift();
+      const nextLevel = levels.get(source) + 1;
+
+      links.forEach((link) => {
+        if (link.source === source && !levels.has(link.target)) {
+          levels.set(link.target, nextLevel);
+          queue.push(link.target);
+        }
+      });
+    }
+
+    return levels;
+  }
+
+  function linkStrokeWidth(link) {
+    return Math.max(1.2, 4.4 - link.level * 0.7);
+  }
 
   function escapeHtml(value) {
     return String(value).replace(/[&<>"']/g, (character) => {
@@ -79,9 +117,11 @@
   function cardHtml(node) {
     const imageClass = node.imageClass ? ` class="${escapeHtml(node.imageClass)}"` : "";
     const image = node.image ? `<img${imageClass} src="${escapeHtml(node.image)}" alt="">` : "";
-    const images = node.images ? `<div class="diagram-image-row">${node.images.map((source) => `<img src="${escapeHtml(source)}" alt="">`).join("")}</div>` : "";
+    const imagesClass = node.imagesClass ? ` ${escapeHtml(node.imagesClass)}` : "";
+    const images = node.images ? `<div class="diagram-image-row${imagesClass}">${node.images.map((source) => `<img src="${escapeHtml(source)}" alt="">`).join("")}</div>` : "";
     const items = node.items ? `<ul>${node.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>` : "";
-    const title = node.showLabel === false ? "" : `<div class="diagram-card-title">${escapeHtml(node.label)}</div>`;
+    const titleText = node.labelLines ? node.labelLines.map((line) => `<span class="diagram-card-title-line">${escapeHtml(line)}</span>`).join("") : escapeHtml(node.label);
+    const title = node.showLabel === false ? "" : `<div class="diagram-card-title">${titleText}</div>`;
 
     if (node.imagePlacement === "after") {
       return `${title}${items}${image}${images}`;
@@ -111,6 +151,49 @@
     return `translate(${node.x}, ${node.y})`;
   }
 
+  function waitForImages(root) {
+    const images = Array.from(root.querySelectorAll("img"));
+
+    return Promise.all(images.map((image) => {
+      if (image.complete) {
+        return Promise.resolve();
+      }
+
+      return new Promise((resolve) => {
+        image.addEventListener("load", resolve, { once: true });
+        image.addEventListener("error", resolve, { once: true });
+      });
+    }));
+  }
+
+  async function measureNodeSizes() {
+    const measurementLayer = d3.select(document.body)
+      .append("div")
+      .attr("class", "diagram-measure-layer");
+
+    const measuredCards = measurementLayer.selectAll("div")
+      .data(nodes)
+      .join("div")
+      .attr("class", (node) => `diagram-card-content diagram-measure-card${node.root ? " is-root-card" : ""}`)
+      .html(cardHtml);
+
+    if (document.fonts) {
+      await document.fonts.ready;
+    }
+
+    await waitForImages(measurementLayer.node());
+
+    measuredCards.each(function (node) {
+      const rect = this.getBoundingClientRect();
+
+      node.width = Math.ceil(rect.width + cardInsetX * 2);
+      node.height = Math.ceil(rect.height + cardInsetY * 2);
+    });
+
+    measurementLayer.remove();
+  }
+
+  measureNodeSizes().then(() => {
   container.textContent = "";
 
   const svg = d3.select(container)
@@ -145,7 +228,8 @@
   const linkSelection = linkLayer.selectAll("line")
     .data(links)
     .join("line")
-    .attr("class", "diagram-link");
+    .attr("class", "diagram-link")
+    .style("stroke-width", (link) => linkStrokeWidth(link));
 
   const nodeSelection = nodeLayer.selectAll("g")
     .data(nodes)
@@ -158,10 +242,10 @@
     .attr("height", (node) => node.height);
 
   nodeSelection.append("foreignObject")
-    .attr("x", 12)
-    .attr("y", 10)
-    .attr("width", (node) => node.width - 24)
-    .attr("height", (node) => node.height - 20)
+    .attr("x", cardInsetX)
+    .attr("y", cardInsetY)
+    .attr("width", (node) => node.width - cardInsetX * 2)
+    .attr("height", (node) => node.height - cardInsetY * 2)
     .append("xhtml:div")
     .attr("class", "diagram-card-content")
     .html(cardHtml);
@@ -226,4 +310,5 @@
   nodeSelection.call(dragNodes);
   downloadButton?.addEventListener("click", downloadNodeCoordinates);
   updateLinks();
+  });
 }());

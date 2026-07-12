@@ -137,10 +137,17 @@
     const lightboxCaption = document.getElementById("lightbox-caption");
     const analysisTabs = Array.from(document.querySelectorAll(".analysis-tab"));
     const analysisPanels = Array.from(document.querySelectorAll(".analysis-panel"));
+    const analysisContent = document.querySelector(".analysis-content");
     const sectionTargets = Array.from(document.querySelectorAll(".section-target"));
     const sectionPrev = document.getElementById("section-prev");
     const sectionNext = document.getElementById("section-next");
     let currentGalleryIndex = 0;
+
+    document.addEventListener("wheel", (event) => {
+      if (analysisContent?.matches(":hover")) {
+        event.preventDefault();
+      }
+    }, { passive: false, capture: true });
 
     function getCurrentSectionIndex() {
       const sectionOffset = parseFloat(getComputedStyle(sectionTargets[0]).scrollMarginTop);
