@@ -31,6 +31,7 @@
     { id: "community-tutorial-projects", label: "community tutorial scratch projects", labelLines: ["community tutorial", "scratch projects"], x: 672.474853515625, y: 1014.46484375 },
     { id: "projects", label: "projects", x: 1134.1806640625, y: 11.15383529663086 },
     { id: "block-code", label: "block code", x: 1318.39453125, y: -212.17391562461853, image: "imgs/block-code-example-1.png", imageClass: "diagram-block-code-image", imagePlacement: "after" },
+    { id: "code-block-types", label: "code block types", x: 1485.39453125, y: -208.17391562461853, image: "imgs/code-block-types.png", imageClass: "diagram-code-block-types-image", showLabel: false },
     { id: "assets", label: "assets", x: 1333.3946533203125, y: 91.15384674072266 },
     { id: "images", label: "images", x: 1513.896240234375, y: 35.401336669921875 },
     { id: "sprite", label: "sprite", x: 1662.35791015625, y: -205.6688995361328, images: ["imgs/cat-sprite.png", "imgs/blueguy-sprite.png", "imgs/crab-sprite.png", "imgs/hammer-sprite.jpg"], imagesClass: "diagram-sprite-grid", imagePlacement: "after" },
@@ -38,9 +39,19 @@
     { id: "text", label: "text", x: 1518.1103515625, y: 139.61538696289062 },
     { id: "audio", label: "audio", x: 1516.00341796875, y: 233.29428100585938 },
     { id: "extensions", label: "extensions", x: 1247.9598388671875, y: 365.4347839355469, image: "imgs/extensions-ss.png", imageClass: "diagram-extensions-image", imagePlacement: "after" },
-    { id: "software", label: "software", x: 1540, y: 438.8963317871094 },
-    { id: "hardware", label: "hardware", x: 1276.42138671875, y: 610 },
-    { id: "lego", label: "lego robotics kits", x: 1397.6422119140625, y: 694.966552734375 }
+    { id: "software", label: "software", x: 1642.926513671875, y: 428.12493896484375 },
+    { id: "hardware", label: "hardware", x: 1466.053466796875, y: 681.6387939453125 },
+    { id: "extension-music", label: "Music", x: 1624.5791015625, y: 280.87957763671875, cardClass: "is-extension-name", image: "imgs/music-project-example-1.png", imageClass: "diagram-extension-image", imagePlacement: "after" },
+    { id: "extension-pen", label: "pen: drawing", x: 1781.453857421875, y: 279.8056640625, cardClass: "is-extension-name", image: "imgs/pen-drawing-example-1.jpeg", imageClass: "diagram-extension-image", imagePlacement: "after" },
+    { id: "extension-computer-vision", label: "Computer vision", x: 1884.142822265625, y: 427.0343933105469, cardClass: "is-extension-name" },
+    { id: "extension-video-sensing", label: "Video Sensing", x: 2067.8414306640625, y: 536.5830993652344, cardClass: "is-extension-name" },
+    { id: "extension-face-sensing", label: "Face Sensing", x: 2066.515869140625, y: 372.36724853515625, cardClass: "is-extension-name", image: "imgs/face-sensing-example-1.jpeg", imageClass: "diagram-extension-image", imagePlacement: "after" },
+    { id: "extension-text-to-speech", label: "Text to Speech", x: 1753.0777587890625, y: 554.2421569824219, cardClass: "is-extension-name" },
+    { id: "extension-translate", label: "Google Translate", x: 1554.0645751953125, y: 555.4566040039062, cardClass: "is-extension-name", image: "imgs/google-translate-symbol.png", imageClass: "diagram-translate-image", imagePlacement: "left" },
+    { id: "extension-makey-makey", label: "Makey Makey", x: 1487.35791015625, y: 831.2709350585938, cardClass: "is-extension-name", image: "imgs/makey-makey-example-1.jpg", imageClass: "diagram-extension-image", imagePlacement: "after" },
+    { id: "extension-microbit", label: "micro:bit", x: 1701.605224609375, y: 831.2709350585938, cardClass: "is-extension-name", image: "imgs/micro-bit-example-1.jpg", imageClass: "diagram-extension-image", imagePlacement: "after" },
+    { id: "extension-go-direct", label: "Go Direct Force & Acceleration", labelLines: ["Go Direct Force", "& Acceleration"], x: 1894.7825927734375, y: 732.2408447265625, cardClass: "is-extension-name" },
+    { id: "extension-mindstorms", label: "lego mindstorms: robotics kits", labelLines: ["lego mindstorms:", "robotics kits"], x: 1249.26416015625, y: 820.6688842773438, cardClass: "is-extension-name", image: "imgs/lego-mindstorm-example-1.jpg", imageClass: "diagram-extension-image", imagePlacement: "after" }
   ];
 
   const links = [
@@ -60,6 +71,7 @@
     ["tutorials", "youtube-video-tutorials"],
     ["tutorials", "community-tutorial-projects"],
     ["projects", "block-code"],
+    ["block-code", "code-block-types"],
     ["projects", "assets"],
     ["assets", "images"],
     ["images", "sprite"],
@@ -69,7 +81,17 @@
     ["projects", "extensions"],
     ["extensions", "software"],
     ["extensions", "hardware"],
-    ["hardware", "lego"]
+    ["software", "extension-music"],
+    ["software", "extension-pen"],
+    ["software", "extension-computer-vision"],
+    ["extension-computer-vision", "extension-video-sensing"],
+    ["extension-computer-vision", "extension-face-sensing"],
+    ["software", "extension-text-to-speech"],
+    ["software", "extension-translate"],
+    ["hardware", "extension-makey-makey"],
+    ["hardware", "extension-microbit"],
+    ["hardware", "extension-go-direct"],
+    ["hardware", "extension-mindstorms"]
   ].map(([source, target]) => ({ source, target }));
 
   const nodeById = new Map(nodes.map((node) => [node.id, node]));
@@ -123,6 +145,10 @@
     const titleText = node.labelLines ? node.labelLines.map((line) => `<span class="diagram-card-title-line">${escapeHtml(line)}</span>`).join("") : escapeHtml(node.label);
     const title = node.showLabel === false ? "" : `<div class="diagram-card-title">${titleText}</div>`;
 
+    if (node.imagePlacement === "left") {
+      return `<div class="diagram-card-inline">${image}${title}</div>${items}${images}`;
+    }
+
     if (node.imagePlacement === "after") {
       return `${title}${items}${image}${images}`;
     }
@@ -174,7 +200,7 @@
     const measuredCards = measurementLayer.selectAll("div")
       .data(nodes)
       .join("div")
-      .attr("class", (node) => `diagram-card-content diagram-measure-card${node.root ? " is-root-card" : ""}`)
+      .attr("class", (node) => `diagram-card-content${node.cardClass ? ` ${node.cardClass}` : ""} diagram-measure-card${node.root ? " is-root-card" : ""}`)
       .html(cardHtml);
 
     if (document.fonts) {
@@ -247,7 +273,7 @@
     .attr("width", (node) => node.width - cardInsetX * 2)
     .attr("height", (node) => node.height - cardInsetY * 2)
     .append("xhtml:div")
-    .attr("class", "diagram-card-content")
+    .attr("class", (node) => `diagram-card-content${node.cardClass ? ` ${node.cardClass}` : ""}`)
     .html(cardHtml);
 
   function updateLinks() {
