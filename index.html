@@ -38,10 +38,13 @@
 
     <h2 class="table-title section-target">layers of analysis</h2>
     <section class="analysis-section" aria-label="Layers of analysis">
-      <div class="analysis-tabs" aria-label="Analysis categories">
-        <button class="analysis-tab is-active" type="button" aria-pressed="true" aria-controls="what-exists-panel" data-panel="what-exists-panel">what exists?</button>
-        <button class="analysis-tab" type="button" aria-pressed="false" aria-controls="project-context-panel" data-panel="project-context-panel">project context</button>
-        <button class="analysis-tab" type="button" aria-pressed="false" aria-controls="visual-aesthetic-panel" data-panel="visual-aesthetic-panel">visual aesthetic</button>
+      <div class="analysis-toolbar">
+        <div class="analysis-tabs" aria-label="Analysis categories">
+          <button class="analysis-tab is-active" type="button" aria-pressed="true" aria-controls="what-exists-panel" data-panel="what-exists-panel">what exists?</button>
+          <button class="analysis-tab" type="button" aria-pressed="false" aria-controls="project-context-panel" data-panel="project-context-panel">project context</button>
+          <button class="analysis-tab" type="button" aria-pressed="false" aria-controls="visual-aesthetic-panel" data-panel="visual-aesthetic-panel">visual aesthetic</button>
+        </div>
+        <button class="analysis-download" id="download-node-coordinates" type="button">download coordinates</button>
       </div>
       <div class="analysis-content" aria-label="Analysis content">
         <div class="analysis-panel" id="what-exists-panel"></div>

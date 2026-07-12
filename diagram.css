@@ -76,6 +76,10 @@
   border: 0;
 }
 
+.diagram-card-content img.diagram-editor-image {
+  max-height: 220px;
+}
+
 .diagram-card-content img.diagram-tutorial-image {
   max-height: 155px;
   object-fit: contain;
