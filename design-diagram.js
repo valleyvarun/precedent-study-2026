@@ -13,14 +13,14 @@
 
   const width = 1600;
   const height = 900;
-  const initialZoom = d3.zoomIdentity.translate(400, 200).scale(0.8);
+  const initialZoom = d3.zoomIdentity.translate(400, 200).scale(1.05);
   const cardInsetX = 12;
   const cardInsetY = 10;
   
   const nodes = [
-    { id: "playground", label: "Playground", text: "colorful, playful, unserious vibes.", image: "imgs/goofy-vibes.png", imageClass: "design-goofy-image", x: 200, y: 300 },
-    { id: "everything-together", label: "Everything Together", text: "everything in one place, so its easy to understand how all parts of a project relate to one another.", image: "imgs/scratch-interface.jpeg", imageClass: "design-interface-image", x: 600, y: 150 },
-    { id: "jigsaw-puzzle", label: "Jigsaw Puzzle", text: "different types of code blocks have different colors and shapes. This gives us a clue to fit the blocks together like a jigsaw puzzle.", image: "imgs/block-code-example-1.png", imageClass: "design-jigsaw-image", x: 600, y: 450 }
+    { id: "playground", label: "Playground", text: "colorful, playful, unserious vibes.", image: "imgs/goofy-vibes.png", imageClass: "design-goofy-image", x: -250.51760482788086, y: -110.76602172851562 },
+    { id: "everything-together", label: "Everything Together", text: "everything in one place, so its easy to understand how all parts of a project relate to one another.", image: "imgs/scratch-interface.jpeg", imageClass: "design-interface-image", x: 450.2691345214844, y: -189.21327209472656 },
+    { id: "jigsaw-puzzle", label: "Jigsaw Puzzle", text: "different types of code blocks have different colors and shapes. This gives us a clue to fit the blocks together like a jigsaw puzzle.", image: "imgs/block-code-example-1.png", imageClass: "design-jigsaw-image", x: 240.91094970703125, y: 227.39132690429688 }
   ];
 
   function escapeHtml(value) {
@@ -145,6 +145,36 @@
         d3.select(this).classed("is-dragging", false);
       });
 
+    function downloadDesignCoordinates() {
+      if (container.hidden) {
+        return;
+      }
+
+      const transform = d3.zoomTransform(svg.node());
+      const data = {
+        diagram: "design-aesthetics",
+        exportedAt: new Date().toISOString(),
+        viewBox: { x: 0, y: 0, width, height },
+        zoom: { x: transform.x, y: transform.y, scale: transform.k },
+        nodes: nodes.map((node) => ({
+          id: node.id,
+          label: node.label,
+          x: node.x,
+          y: node.y,
+          width: node.width,
+          height: node.height
+        }))
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = "design-aesthetics-node-coordinates.json";
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
     const zoomDiagram = d3.zoom()
       .scaleExtent([0.45, 6])
       .on("zoom", (event) => {
@@ -154,5 +184,6 @@
     svg.call(zoomDiagram);
     svg.call(zoomDiagram.transform, initialZoom);
     nodeSelection.call(dragNodes);
+    downloadButton?.addEventListener("click", downloadDesignCoordinates);
   });
 }());
