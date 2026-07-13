@@ -1,0 +1,196 @@
+#project-context-panel {
+  overflow: hidden;
+}
+
+.project-context-diagram {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+
+.project-context-diagram:active {
+  cursor: grabbing;
+}
+
+.project-context-decade-guide {
+  stroke: #9d978c;
+  stroke-width: 1.2;
+  stroke-dasharray: 7 9;
+  vector-effect: non-scaling-stroke;
+}
+
+.project-context-main-line,
+.project-context-stem {
+  stroke: var(--body-text);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.project-context-marker {
+  fill: #ebe6dc;
+  stroke: var(--body-text);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.project-context-connections {
+  pointer-events: none;
+}
+
+.project-context-connection {
+  stroke: #6f6a60;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  opacity: 0.78;
+  vector-effect: non-scaling-stroke;
+}
+
+.project-context-block .diagram-card-content {
+  font-size: 16px;
+}
+
+.project-context-centered-card {
+  align-items: center;
+  text-align: center;
+}
+
+.project-context-block.is-fixed {
+  cursor: default;
+}
+
+.project-context-block.is-fixed {
+  cursor: default;
+}
+
+.project-context-logo-text-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.project-context-logo-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-weight: 700;
+  line-height: 115%;
+  white-space: nowrap;
+}
+
+.project-context-logo-stack {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.diagram-card-content img.project-context-stack-logo {
+  width: 96px;
+  max-height: 44px;
+  background: transparent;
+  border: 0;
+}
+
+.project-context-logo-stack img.project-context-stack-logo:last-child {
+  width: 128px;
+  max-height: 58px;
+}
+
+.project-context-text-stack,
+.project-context-image-pair-card,
+.project-context-title-image-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.project-context-title-lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 700;
+  line-height: 120%;
+  white-space: nowrap;
+}
+
+.project-context-text-lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  line-height: 120%;
+  white-space: nowrap;
+}
+
+.project-context-image-pair {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.diagram-card-content img.project-context-pair-image {
+  width: 120px;
+  max-height: 72px;
+  object-fit: cover;
+}
+
+.diagram-card-content img.project-context-logo-screenshot {
+  width: 190px;
+  max-height: 72px;
+  object-fit: cover;
+}
+
+.diagram-card-content img.project-context-logo-image {
+  width: auto;
+  max-width: 92px;
+  max-height: 64px;
+  background: transparent;
+  border: 0;
+}
+
+.diagram-card-content img.project-context-logo-large {
+  max-width: 124px;
+  max-height: 82px;
+}
+
+.diagram-card-content img.project-context-logo-feature {
+  max-width: 186px;
+  max-height: 123px;
+}
+
+.diagram-card-content img.project-context-photo-image {
+  width: 132px;
+  max-height: 92px;
+  object-fit: cover;
+}
+
+.project-context-year {
+  fill: var(--body-text);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.project-context-loading {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.05vw;
+}
+
+@media (max-width: 100vh) {
+  .project-context-year {
+    font-size: 17px;
+  }
+
+  .project-context-loading {
+    font-size: 4vw;
+  }
+}

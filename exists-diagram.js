@@ -22,10 +22,10 @@
     { id: "community", label: "community", x: 130, y: 350 },
     { id: "learning", label: "learning", x: 660.2008056640625, y: 620.7525024414062 },
     { id: "editor", label: "Scratch editor", x: 760.1337890625, y: -161.20401763916016, image: "imgs/create-img-1.png", imageClass: "diagram-editor-image", imagePlacement: "after", items: ["block code", "sprites", "stage preview"] },
-    { id: "community-projects", label: "community projects", x: -240, y: 290, images: ["imgs/comments-ss-1.png", "imgs/scratch-explore-ss-1.png"], imagesClass: "diagram-community-images", showLabel: false },
-    { id: "share-projects", label: "share projects", x: -335.602012634277344, y: 507.1070556640625 },
-    { id: "remix-projects", label: "remix projects", x: -29.214019775390625, y: 505 },
-    { id: "studios", label: "studios", x: -150.28428649902344, y: 632.6421508789062 },
+    { id: "community-projects", label: "community projects", x: -434.6822814941406, y: 122.07357788085938, images: ["imgs/comments-ss-1.png", "imgs/scratch-explore-ss-1.png"], imagesClass: "diagram-community-images", showLabel: false },
+    { id: "share-projects", label: "share projects", x: -434.6321334838867, y: 572.4248046875 },
+    { id: "remix-projects", label: "remix projects", x: -41.85616111755371, y: 614.5652465820312 },
+    { id: "studios", label: "studios", x: -228.2441635131836, y: 790.6689453125 },
     { id: "tutorials", label: "tutorials screenshot", x: 720.033447265625, y: 704.8161010742188, image: "imgs/tutorials-ss-1.png", imageClass: "diagram-tutorial-image", showLabel: false },
     { id: "youtube-video-tutorials", label: "Youtube video tutorials", labelLines: ["Youtube video", "tutorials"], x: 437.7591552734375, y: 997.6087646484375 },
     { id: "community-tutorial-projects", label: "community tutorial scratch projects", labelLines: ["community tutorial", "scratch projects"], x: 672.474853515625, y: 1014.46484375 },
@@ -287,6 +287,10 @@
   }
 
   function downloadNodeCoordinates() {
+    if (container.hidden) {
+      return;
+    }
+
     const transform = d3.zoomTransform(svg.node());
     const data = {
       diagram: "what-exists",

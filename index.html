@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>precedent study</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="diagram.css">
+  <link rel="stylesheet" href="exists-diagram.css">
+  <link rel="stylesheet" href="project-context-diagram.css">
 </head>
 <body>
   <header class="site-header" aria-label="Site header">
@@ -42,14 +43,33 @@
         <div class="analysis-tabs" aria-label="Analysis categories">
           <button class="analysis-tab is-active" type="button" aria-pressed="true" aria-controls="what-exists-panel" data-panel="what-exists-panel">what exists?</button>
           <button class="analysis-tab" type="button" aria-pressed="false" aria-controls="project-context-panel" data-panel="project-context-panel">project context</button>
-          <button class="analysis-tab" type="button" aria-pressed="false" aria-controls="visual-aesthetic-panel" data-panel="visual-aesthetic-panel">visual aesthetic</button>
+          <button class="analysis-tab" type="button" aria-pressed="false" aria-controls="visual-aesthetic-panel" data-panel="visual-aesthetic-panel">design, aesthetics</button>
         </div>
-        <button class="analysis-download" id="download-node-coordinates" type="button">download coordinates</button>
+        <button class="analysis-download" id="download-node-coordinates" type="button" aria-label="download coordinates" title="download coordinates">
+          <svg class="download-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 3v12"></path>
+            <path d="m7 10 5 5 5-5"></path>
+            <path d="M5 19h14"></path>
+          </svg>
+        </button>
       </div>
       <div class="analysis-content" aria-label="Analysis content">
-        <div class="analysis-panel" id="what-exists-panel"></div>
-        <div class="analysis-panel" id="project-context-panel" hidden></div>
-        <div class="analysis-panel" id="visual-aesthetic-panel" hidden></div>
+        <div class="analysis-text-column" aria-label="Analysis notes">
+          <div class="analysis-text-panel" data-panel="what-exists-panel">
+            <p>what exists?</p>
+          </div>
+          <div class="analysis-text-panel" data-panel="project-context-panel" hidden>
+            <p>project context</p>
+          </div>
+          <div class="analysis-text-panel" data-panel="visual-aesthetic-panel" hidden>
+            <p>design, aesthetics</p>
+          </div>
+        </div>
+        <div class="analysis-viewport" aria-label="Analysis viewport">
+          <div class="analysis-panel" id="what-exists-panel"></div>
+          <div class="analysis-panel" id="project-context-panel" hidden></div>
+          <div class="analysis-panel" id="visual-aesthetic-panel" hidden></div>
+        </div>
       </div>
     </section>
 
@@ -121,110 +141,9 @@
     </div>
   </div>
 
-  <script>
-    fetch("intro-para.txt")
-      .then((response) => response.text())
-      .then((text) => {
-        document.getElementById("intro-text").textContent = text;
-      })
-      .catch(() => {
-        document.getElementById("intro-text").textContent = "Unable to load intro text.";
-      });
-
-    const galleryItems = Array.from(document.querySelectorAll(".gallery-item"));
-    const lightbox = document.getElementById("gallery-lightbox");
-    const lightboxImage = document.getElementById("lightbox-image");
-    const lightboxCaption = document.getElementById("lightbox-caption");
-    const analysisTabs = Array.from(document.querySelectorAll(".analysis-tab"));
-    const analysisPanels = Array.from(document.querySelectorAll(".analysis-panel"));
-    const analysisContent = document.querySelector(".analysis-content");
-    const sectionTargets = Array.from(document.querySelectorAll(".section-target"));
-    const sectionPrev = document.getElementById("section-prev");
-    const sectionNext = document.getElementById("section-next");
-    let currentGalleryIndex = 0;
-
-    document.addEventListener("wheel", (event) => {
-      if (analysisContent?.matches(":hover")) {
-        event.preventDefault();
-      }
-    }, { passive: false, capture: true });
-
-    function getCurrentSectionIndex() {
-      const sectionOffset = parseFloat(getComputedStyle(sectionTargets[0]).scrollMarginTop);
-      const currentTop = window.scrollY + sectionOffset + 1;
-
-      return sectionTargets.reduce((currentIndex, target, index) => {
-        return target.offsetTop <= currentTop ? index : currentIndex;
-      }, 0);
-    }
-
-    function moveSection(direction) {
-      const currentIndex = getCurrentSectionIndex();
-      const nextIndex = Math.max(0, Math.min(sectionTargets.length - 1, currentIndex + direction));
-      sectionTargets[nextIndex].scrollIntoView({ block: "start" });
-    }
-
-    sectionPrev.addEventListener("click", () => moveSection(-1));
-    sectionNext.addEventListener("click", () => moveSection(1));
-
-    document.addEventListener("keydown", (event) => {
-      if (!lightbox.hidden || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
-        return;
-      }
-
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        moveSection(-1);
-      }
-
-      if (event.key === "ArrowRight") {
-        event.preventDefault();
-        moveSection(1);
-      }
-    });
-
-    analysisTabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        analysisTabs.forEach((item) => {
-          const isActive = item === tab;
-          item.classList.toggle("is-active", isActive);
-          item.setAttribute("aria-pressed", String(isActive));
-        });
-
-        analysisPanels.forEach((panel) => {
-          panel.hidden = panel.id !== tab.dataset.panel;
-        });
-      });
-    });
-
-    function showGalleryImage(index) {
-      currentGalleryIndex = (index + galleryItems.length) % galleryItems.length;
-      const item = galleryItems[currentGalleryIndex];
-      const image = item.querySelector("img");
-
-      lightboxImage.src = item.dataset.full;
-      lightboxImage.alt = image.alt;
-      lightboxCaption.textContent = item.dataset.caption;
-      lightbox.hidden = false;
-    }
-
-    galleryItems.forEach((item, index) => {
-      item.addEventListener("click", () => showGalleryImage(index));
-    });
-
-    document.getElementById("gallery-prev").addEventListener("click", () => {
-      showGalleryImage(currentGalleryIndex - 1);
-    });
-
-    document.getElementById("gallery-next").addEventListener("click", () => {
-      showGalleryImage(currentGalleryIndex + 1);
-    });
-
-    document.querySelector(".lightbox-close").addEventListener("click", () => {
-      lightbox.hidden = true;
-    });
-  </script>
   <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
-  <script src="analysis-diagram.js"></script>
+  <script src="script.js"></script>
+  <script src="exists-diagram.js"></script>
+  <script src="project-context-diagram.js"></script>
 </body>
 </html>
