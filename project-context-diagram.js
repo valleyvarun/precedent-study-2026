@@ -27,7 +27,7 @@
 		year,
 		side: index % 2 === 0 ? "up" : "down"
 	}));
-	const eventYears = [1967, 1984, 1985, 1991, 1998, 2003, 2007, 2013, 2019].map((year) => ({
+	const eventYears = [1967, 1984, 1992, 1998, 2003, 2007, 2013, 2019].map((year) => ({
 		year,
 		side: "up"
 	}));
@@ -41,6 +41,8 @@
 		{ id: "scratch-1", label: "1.0", x: 1021.5, y: 436, timelineYear: 2007, fixed: true },
 		{ id: "scratch-2", label: "2.0", x: 1141.5, y: 436, timelineYear: 2013, fixed: true },
 		{ id: "scratch-3", label: "3.0", x: 1261.5, y: 436, timelineYear: 2019, fixed: true },
+		{ id: "apple-macentosh", label: "apple macentosh", x: 0, y: 0, timelineYear: 1984, fixed: true, contentClass: "project-context-small-text-card" },
+		{ id: "www-html", label: "www.  HTML", x: 0, y: 0, timelineYear: 1992, fixed: true, contentClass: "project-context-small-text-card" },
 		{ id: "national-science-foundation", label: "National Science Foundation", x: 909.3912658691406, y: 353.5217590332031, image: "imgs/National-Science-Foundation-logo-1.webp", imageClass: "project-context-logo-image", logoOnly: true },
 		{ id: "google-blockly", label: "Google Blockly", x: 1040.521728515625, y: -100, layout: "logoStack", images: [{ src: "imgs/google-logo.png", alt: "Google" }, { src: "imgs/blockly-logo.svg", alt: "Blockly" }] },
 		{ id: "smalltalk", label: "smalltalk", x: 160.43487548828125, y: 87.65214538574219, layout: "textStack", textLines: ['"live" object-oriented programming'] },

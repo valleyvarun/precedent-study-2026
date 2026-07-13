@@ -60,8 +60,16 @@
   cursor: default;
 }
 
-.project-context-block.is-fixed {
-  cursor: default;
+.project-context-small-text-card,
+.project-context-block .project-context-small-text-card {
+  font-size: 11px;
+  line-height: 125%;
+  min-height: 18px;
+  justify-content: center;
+}
+
+.project-context-small-text-card .diagram-card-title {
+  line-height: 125%;
 }
 
 .project-context-logo-text-card {
