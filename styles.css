@@ -273,6 +273,17 @@ body {
   display: none;
 }
 
+.analysis-text-panel[data-panel="visual-aesthetic-panel"]:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
+}
+
+.analysis-text-panel[data-panel="visual-aesthetic-panel"] p {
+  font-size: 1.05vw;
+}
+
 .analysis-viewport {
   position: relative;
   min-width: 0;
