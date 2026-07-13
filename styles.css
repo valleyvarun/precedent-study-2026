@@ -232,13 +232,41 @@ body {
 .analysis-text-panel {
   color: var(--body-text);
   font-family: "Courier New", Courier, monospace;
-  font-size: 1.05vw;
-  font-weight: 700;
+  font-size: 0.72vw;
+  font-weight: 400;
   line-height: 140%;
 }
 
 .analysis-text-panel p {
   margin: 0;
+  font-size: 0.9vw;
+  font-weight: 400;
+}
+
+.analysis-text-panel h3 {
+  margin: 0 0 0.85em;
+  font: inherit;
+  font-size: 0.9vw;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.analysis-text-panel ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.analysis-text-panel li + li {
+  margin-top: 1em;
+}
+
+.analysis-p-label {
+  display: inline-block;
+  margin-bottom: 0.25em;
+  font-size: 0.9vw;
+  font-weight: 700;
+  text-decoration: underline;
 }
 
 .analysis-text-panel[hidden] {
